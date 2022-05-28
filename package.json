@@ -3,7 +3,7 @@
   "bundleDependencies": false,
   "name": "language-ca65-asm",
   "version": "0.0.0",
-  "description": "Adds syntax highlighting for the CA65 assembler.",
+  "description": "Adds syntax highlighting for the CA65 6502 assembler.",
   "dependencies": {},
   "deprecated": false,
   "engines": {
