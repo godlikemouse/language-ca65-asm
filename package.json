@@ -1,0 +1,21 @@
+{
+  "activationCommands": {},
+  "bundleDependencies": false,
+  "name": "language-ca65-asm",
+  "version": "0.0.0",
+  "description": "Adds syntax highlighting for the CA65 assembler.",
+  "dependencies": {},
+  "deprecated": false,
+  "engines": {
+    "atom": "*"
+  },
+  "homepage": "https://github.com/godlikemouse/language-ca65-asm",
+  "keywords": [
+    "assembly",
+    "assembler",
+    "ca65",
+    "6502"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/godlikemouse/language-ca65-asm"
+}

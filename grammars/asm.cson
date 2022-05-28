@@ -1,0 +1,111 @@
+'scopeName': 'source.asm'
+'name': 'CA65 Assembler'
+'fileTypes': [
+  'asm'
+]
+'patterns': [
+  {
+    'include': '#line_comments'
+  }
+  {
+    'include': '#string'
+  }
+  {
+    'include': '#asmkey'
+  }
+  {
+    'include': '#hexpats'
+  }
+  {
+    'include': '#numpats'
+  }
+  {
+    'include': '#label'
+  }
+  {
+    'include': '#jumps'
+  }
+]
+'repository':
+  'string':
+    'patterns': [
+      {
+        'match': 'AF\''
+      }
+      {
+        'begin': '\''
+        'end': '\''
+        'name': 'string.quoted.single.asm'
+      }
+      {
+        'begin': '\"'
+        'end': '\"'
+        'name': 'string.quoted.double.asm'
+      }
+    ]
+  'line_comments':
+     'begin': ';'
+     'end': '\\n'
+     'name': 'comment.line.asm'
+
+  'asmkey':
+    'patterns': [
+      # 6502 internal commands
+      {
+       'match': '\\s(\\:\\d+\\s)?(?i:(adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny|jmp|jsr))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      {
+       'match': '\\s(\\:\\d+\\s)?(?i:(lda|ldx|ldy|lsr|nop|ora|pha|php|pla|plp|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|tax|tay|tsx|txa|txs|tya))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      {
+       'match': '\\s(\\:\\d+\\s)?(?i:(jeq|jne|jpl|jmi|jcc|jcs|jvc|jvs))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      # pseudo variables
+      {
+        'match': '\\s*\\.(?i:(asize|cpu|isize|paramcount|time|version))\\s'
+        'name': 'keyword.control.statement.asm'
+      }
+      # CA65 pseudo functions
+      {
+       'match': '\\s*\\.(?i:(addrsize|bank|bankbyte|blank|concat|const|def|defined|definedmacro|hibyte|hiword|ident|ismnem|ismnemonic|left|lobyte|loword|match|max|mid|min|ref|referenced|right|sizeof|sprint|strat|string|strlen|tcount|xmatch))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      # CA65 control commands
+      {
+       'match': '\\s*\\.(?i:(a16|a8|addr|align|asciiz|assert|autoimport|bankbytes|bss|byt|byte|case|charmap|code|condes|constructor|data|dbyt|debuginfo|define|delmac|delmacro|destructor|dword|else|elseif|end|endenum|endif|endmac|endmacro|endproc|endrep))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      {
+       'match': '\\s*\\.(?i:(endrepeat|endscope|endstruct|endunion|enum|error|exitmac|exitmacro|export|exportzp|faraddr|fatal|feature|fileopt|fopt|forceimport|global|globalzp|hibytes|i16|i8|if|ifblank|ifconst|ifdef|ifnblank|ifndef|ifnref|ifp02|ifp4510|ifp816))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      {
+       'match': '\\s*\\.(?i:(ifpc02|ifpdtv|ifpsc02|ifref|import|importzp|incbin|include|interruptor|linecont|list|listbytes|literal|lobytes|local|localchar|macpack|mac|macro|org|out|p02|p4510|p816|pagelen|pagelength|pc02|pdtv|popcharmap|popcpu|popseg|proc))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+      {
+       'match': '\\s*\\.(?i:(psc02|pushcharmap|pushcpu|pushseg|referto|refto|reloc|repeat|res|rodata|scope|segment|set|setcpu|smart|struct|tag|undef|undefine|union|warning|word|zeropage))\\s'
+       'name': 'keyword.control.statement.asm'
+      }
+    ]
+
+  'label':
+     'match': '^[\\w\\@\\?]{1}[\\w]*\\:\\s*$'
+     'name': 'storage.type.function.asm'
+  'hexpats':
+    'patterns':[
+      {
+        'match': '\\$[0-9a-fA-F]+'
+        'name': 'constant.numeric.integer.hexadecimal.asm'
+      }
+      {
+        'match': '\\b[0-9a-fA-F]+[hH]\\b'
+        'name': 'constant.numeric.integer.hexadecimal.asm'
+      }
+     ]
+  'numpats':
+     'match': '\\b\\d+'
+     'name': 'constant.numeric.integer.decimal.asm'

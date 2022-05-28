@@ -1,0 +1,4 @@
+'.source.asm':
+  'editor':
+    'commentStart': ';'
+    'commentEnd': ''
