@@ -1,7 +1,8 @@
 'scopeName': 'source.asm'
 'name': 'CA65 Assembler'
 'fileTypes': [
-  'asm'
+  'asm',
+  's'
 ]
 'patterns': [
   {
@@ -12,6 +13,9 @@
   }
   {
     'include': '#asmkey'
+  }
+  {
+    'include': '#binpats'
   }
   {
     'include': '#hexpats'
@@ -50,51 +54,84 @@
 
   'asmkey':
     'patterns': [
+      # branches (6502)
+      {
+        'match': '\\b(beq|bne|bvc|bvs|bcc|bcs|bmi|bpl|jmp|jsr)\\s+(\\w+|\\$[0-9A-F]{4}|:[-+])\\s'
+        'captures':
+            '1':
+                'name': 'keyword.control.statement.asm'
+            '2':
+                'name': 'storage.type.function.asm'
+        'name': 'meta.branches.asm'
+      }
+      # branches (65c02)
+      {
+        'match': '\\b(bra|bbr|bbs)\\s+(\\w+|\\$[0-9A-F]{4}|:[-+])\\s'
+        'captures':
+            '1':
+                'name': 'keyword.control.statement.asm'
+            '2':
+                'name': 'storage.type.function.asm'
+        'name': 'meta.branches.asm'
+      }
       # 6502 internal commands
       {
-       'match': '\\s(\\:\\d+\\s)?(?i:(adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny|jmp|jsr))\\s'
+       'match': '\\b(\\:\\d+\\s)?(?i:(adc|and|asl|bit|brk|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny))\\s'
        'name': 'keyword.control.statement.asm'
       }
       {
-       'match': '\\s(\\:\\d+\\s)?(?i:(lda|ldx|ldy|lsr|nop|ora|pha|php|pla|plp|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|tax|tay|tsx|txa|txs|tya))\\s'
+       'match': '\\b(\\:\\d+\\s)?(?i:(lda|ldx|ldy|lsr|nop|ora|pha|php|pla|plp|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|tax|tay|tsx|txa|txs|tya))\\s'
        'name': 'keyword.control.statement.asm'
       }
       {
        'match': '\\s(\\:\\d+\\s)?(?i:(jeq|jne|jpl|jmi|jcc|jcs|jvc|jvs))\\s'
        'name': 'keyword.control.statement.asm'
       }
+      # 65c02 internal commands
+      {
+       'match': '\\b(\\:\\d+\\s)?(?i:(phx|plx|phy|ply|stz|trb|tsb|rmb|smb|stp|wai))\\s'
+       'name': 'keyword.control.statement.asmc02'
+      }
       # pseudo variables
       {
         'match': '\\s*\\.(?i:(asize|cpu|isize|paramcount|time|version))\\s'
-        'name': 'keyword.control.statement.asm'
+        'name': 'keyword.control.statement.pseudovar'
       }
       # CA65 pseudo functions
       {
        'match': '\\s*\\.(?i:(addrsize|bank|bankbyte|blank|concat|const|def|defined|definedmacro|hibyte|hiword|ident|ismnem|ismnemonic|left|lobyte|loword|match|max|mid|min|ref|referenced|right|sizeof|sprint|strat|string|strlen|tcount|xmatch))\\s'
-       'name': 'keyword.control.statement.asm'
+       'name': 'keyword.control.statement.ca65'
       }
       # CA65 control commands
       {
        'match': '\\s*\\.(?i:(a16|a8|addr|align|asciiz|assert|autoimport|bankbytes|bss|byt|byte|case|charmap|code|condes|constructor|data|dbyt|debuginfo|define|delmac|delmacro|destructor|dword|else|elseif|end|endenum|endif|endmac|endmacro|endproc|endrep))\\s'
-       'name': 'keyword.control.statement.asm'
+       'name': 'keyword.control.statement.ca65'
       }
       {
        'match': '\\s*\\.(?i:(endrepeat|endscope|endstruct|endunion|enum|error|exitmac|exitmacro|export|exportzp|faraddr|fatal|feature|fileopt|fopt|forceimport|global|globalzp|hibytes|i16|i8|if|ifblank|ifconst|ifdef|ifnblank|ifndef|ifnref|ifp02|ifp4510|ifp816))\\s'
-       'name': 'keyword.control.statement.asm'
+       'name': 'keyword.control.statement.ca65'
       }
       {
        'match': '\\s*\\.(?i:(ifpc02|ifpdtv|ifpsc02|ifref|import|importzp|incbin|include|interruptor|linecont|list|listbytes|literal|lobytes|local|localchar|macpack|mac|macro|org|out|p02|p4510|p816|pagelen|pagelength|pc02|pdtv|popcharmap|popcpu|popseg|proc))\\s'
-       'name': 'keyword.control.statement.asm'
+       'name': 'keyword.control.statement.ca65'
       }
       {
        'match': '\\s*\\.(?i:(psc02|pushcharmap|pushcpu|pushseg|referto|refto|reloc|repeat|res|rodata|scope|segment|set|setcpu|smart|struct|tag|undef|undefine|union|warning|word|zeropage))\\s'
-       'name': 'keyword.control.statement.asm'
+       'name': 'keyword.control.statement.ca65'
       }
     ]
 
   'label':
-     'match': '^[\\w\\@\\?]{1}[\\w]*\\:\\s*$'
-     'name': 'storage.type.function.asm'
+    'patterns':[
+      {
+         'match': '^[\\w\\@\\?]{1}[\\w]*\\:\\s*$'
+         'name': 'storage.type.function.asm'
+      }
+      {
+         'match': '^:\\s'
+         'name': 'storage.type.function.asm'
+      }
+     ]
   'hexpats':
     'patterns':[
       {
@@ -106,6 +143,9 @@
         'name': 'constant.numeric.integer.hexadecimal.asm'
       }
      ]
+  'binpats':
+     'match': '%[0-9a-fA-F]+'
+     'name': 'constant.numeric.integer.binary.asm'
   'numpats':
      'match': '\\b\\d+'
      'name': 'constant.numeric.integer.decimal.asm'
