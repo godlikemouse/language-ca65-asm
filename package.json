@@ -2,8 +2,10 @@
   "activationCommands": {},
   "bundleDependencies": false,
   "name": "language-ca65-asm",
+  "main": "./lib/asm-reference",
+  "styles": [ "./styles/language-ca65-asm" ],
   "version": "0.2.0",
-  "description": "Adds syntax highlighting for the CA65 6502 assembler.",
+  "description": "Adds syntax highlighting and instruction cheatsheet for the CA65 6502 assembler.",
   "dependencies": {},
   "deprecated": false,
   "engines": {

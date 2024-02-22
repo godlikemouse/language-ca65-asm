@@ -1,0 +1,29 @@
+{
+  "enableInstructionsTooltips": {
+    "description": "Show tooltips with instructions documentation",
+    "type": "boolean",
+    "default": true
+  },
+  "enableNumberTooltips": {
+    "description": "Show tooltips with number conversions",
+    "type": "boolean",
+    "default": true
+  },
+
+  "cpuType": {
+    "description": "CPU instruction set for use in tooltips",
+    "type": "string",
+    "default": "65c02",
+    "enum": [
+      { "value": "6502",       "description": "MOS 6502" },
+      { "value": "6502rorbug", "description": "MOS 6502 without ROR" },
+      { "value": "65dtv02",    "description": "65DTV02" },
+      { "value": "65c02",      "description": "WDC 65C02" },
+      { "value": "r65c02",     "description": "Rockwell R65C02" },
+      { "value": "r65c02",     "description": "Rockwell R65C02" },
+      { "value": "65c02s",     "description": "WDC 65C02S" },
+      { "value": "65ce02",     "description": "CSG 65CE02" },
+      { "value": "65c816",     "description": "WDC 65C816" }
+    ]
+  }
+}
