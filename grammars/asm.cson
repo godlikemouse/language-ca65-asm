@@ -54,9 +54,19 @@
 
   'asmkey':
     'patterns': [
-      # branches (6502)
+      # branches and subroutines (6502)
       {
-        'match': '\\b(beq|bne|bvc|bvs|bcc|bcs|bmi|bpl|jmp|jsr)\\s+(\\w+|\\$[0-9A-F]{4}|:[-+])\\s'
+        'match': '\\b(beq|bne|bvc|bvs|bcc|bcs|bmi|bpl|jsr)\\s+(\\w+|\\$[0-9A-F]{4}|:[-+])\\s'
+        'captures':
+            '1':
+                'name': 'keyword.control.statement.asm'
+            '2':
+                'name': 'storage.type.function.asm'
+        'name': 'meta.branches.asm'
+      }
+      # jumps (6502)
+      {
+        'match': '\\b(jmp)\\s+\\(*(\\w+|\\$[0-9A-F]{4}|:[-+])\\)*\\s'
         'captures':
             '1':
                 'name': 'keyword.control.statement.asm'
@@ -69,7 +79,27 @@
         'match': '\\b(bra|bbr|bbs)\\s+(\\w+|\\$[0-9A-F]{4}|:[-+])\\s'
         'captures':
             '1':
-                'name': 'keyword.control.statement.asm'
+                'name': 'keyword.control.statement.asmc02'
+            '2':
+                'name': 'storage.type.function.asm'
+        'name': 'meta.branches.asm'
+      }
+      # long branches (65816)
+      {
+        'match': '\\b(brl)\\s+(\\w+|\\$[0-9A-F]{4}|:[-+])\\s'
+        'captures':
+            '1':
+                'name': 'keyword.control.statement.asm816'
+            '2':
+                'name': 'storage.type.function.asm'
+        'name': 'meta.branches.asm'
+      }
+      # long jumps (65816)
+      {
+        'match': '\\b(jsl)\\s+(\\w+|\\$[0-9A-F]{6}|:[-+])\\s'
+        'captures':
+            '1':
+                'name': 'keyword.control.statement.asm816'
             '2':
                 'name': 'storage.type.function.asm'
         'name': 'meta.branches.asm'
@@ -91,6 +121,11 @@
       {
        'match': '\\b(\\:\\d+\\s)?(?i:(phx|plx|phy|ply|stz|trb|tsb|rmb|smb|stp|wai))\\s'
        'name': 'keyword.control.statement.asmc02'
+      }
+      # 65816 internal commands
+      {
+       'match': '\\b(\\:\\d+\\s)?(?i:(cop|mvn|mvp|pea|pei|per|phb|phd|phk|plb|pld|rep|rtl|sep|stp|tcp|tcs|tdc|tsc|txy|tyx|wdm|xba|xce))\\s'
+       'name': 'keyword.control.statement.asm816'
       }
       # pseudo variables
       {
@@ -139,12 +174,12 @@
         'name': 'constant.numeric.integer.hexadecimal.asm'
       }
       {
-        'match': '\\b[0-9a-fA-F]+[hH]\\b'
+        'match': '\\b\\$[0-9a-fA-F]+[hH]\\b'
         'name': 'constant.numeric.integer.hexadecimal.asm'
       }
      ]
   'binpats':
-     'match': '%[0-9a-fA-F]+'
+     'match': '%[0-1]{1,8}'
      'name': 'constant.numeric.integer.binary.asm'
   'numpats':
      'match': '\\b\\d+'
